@@ -5,7 +5,7 @@ PYTHONIDAS_GIT="https://bitbucket.org/mack0/pythonidas.git"
 FRAMSTICKS_SDK_ROOT=framsticks
 PYTHONIDAS_SDK_ROOT=${FRAMSTICKS_SDK_ROOT}/cpp/pythonidas
 # image name
-IMAGE_NAME=pythonidas/develop
+IMAGE_NAME=jakubtomczak/pythonidas_dev_image
 # container name
 CONTAINER_NAME=pythonidas_dev
 

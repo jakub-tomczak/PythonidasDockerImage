@@ -60,7 +60,7 @@ ARG pythonidas_python_dependencies_file=requirements.txt
 
 RUN apt-get install -y python3-tk python-opengl
 # clone pythonidas and install its requirements
-RUN git clone ${PYTHONIDAS_GIT} ${pythonidas_tmp_dir}
+RUN git clone -b gui ${PYTHONIDAS_GIT} ${pythonidas_tmp_dir}
 RUN pip install -r ${pythonidas_tmp_dir}/${pythonidas_python_dependencies_file}  || : # ignore error when file not exist - file with requirements may not exist in the future releases
 # remove pythonidas since it is not required anymore
 RUN rm -rf ${pythonidas_tmp_dir}

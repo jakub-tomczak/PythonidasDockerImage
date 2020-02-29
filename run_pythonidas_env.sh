@@ -6,7 +6,7 @@ FRAMSTICKS_SDK_ROOT=`pwd`/framsticks
 FRAMSTICKS_SDK_ROOT_DOCKER=framsticks
 PYTHONIDAS_SDK_ROOT=${FRAMSTICKS_SDK_ROOT}/cpp/pythonidas
 # image name
-IMAGE_NAME=jakubtomczak/pythonidas_dev_image
+IMAGE_NAME=jakubtomczak/pythonidas_dev_image:gui
 # container name
 CONTAINER_NAME=pythonidas_dev
 

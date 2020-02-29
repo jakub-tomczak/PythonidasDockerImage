@@ -13,6 +13,12 @@ It is not required to have FramsticksSDK nor Pythonidas before launching contain
 
 If pythonidas docker image has been already launched and there exists a **running** container with `pythonidas_dev` name then docker runs it and doesn't run another instance of the pythonidas docker image.
 
+Container should start in `/framsticks` directory. Enter `/framsticks/cpp` directory and build `framsticksSDK` by typing command (may change in the newer versions of `framsticksSDK`):
+```
+make -f frams/Makefile-SDK lib
+```
+then enter `/framsticks/cpp/pythonidas` directory and follow build instructions from `README.md` to build `pythonidas`.
+
 ## Launch container manually
 
 Of course container for `pythonidas` development may be created using just the `docker run` command:

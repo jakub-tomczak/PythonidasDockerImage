@@ -2,7 +2,8 @@
 
 FRAMSTICKS_SDK_SVN="https://www.framsticks.com/svn/framsticks/"
 PYTHONIDAS_GIT="https://bitbucket.org/mack0/pythonidas.git"
-FRAMSTICKS_SDK_ROOT=framsticks
+FRAMSTICKS_SDK_ROOT=`pwd`/framsticks
+FRAMSTICKS_SDK_ROOT_DOCKER=framsticks
 PYTHONIDAS_SDK_ROOT=${FRAMSTICKS_SDK_ROOT}/cpp/pythonidas
 # image name
 IMAGE_NAME=jakubtomczak/pythonidas_dev_image
@@ -10,11 +11,11 @@ IMAGE_NAME=jakubtomczak/pythonidas_dev_image
 CONTAINER_NAME=pythonidas_dev
 
 
-PYTHONIDAS_DOCKER_CONTAINER_ID=$(sudo docker ps -aqf "name=${CONTAINER_NAME}")
+PYTHONIDAS_DOCKER_CONTAINER_ID=$(sudo docker ps -qf "name=${CONTAINER_NAME}")
 
 if [ ! -z "$PYTHONIDAS_DOCKER_CONTAINER_ID" ];then
     # launch existing container
-    echo "Opening existing container [$PYTHONIDAS_DOCKER_CONTAINER_ID]"
+    echo "Opening existing and running container [$PYTHONIDAS_DOCKER_CONTAINER_ID]"
     sudo docker exec -it $PYTHONIDAS_DOCKER_CONTAINER_ID /bin/bash
     exit 0
 fi
@@ -73,9 +74,12 @@ if [ ! $`git status &>/dev/null` ];then
 fi
 popd &>/dev/null
 
-echo "Launching pythonidas dev image with name ${CONTAINER_NAME}."
+echo "Launching pythonidas dev image with name '${CONTAINER_NAME}'."
+echo "Mounting directory '${FRAMSTICKS_SDK_ROOT}' to '${FRAMSTICKS_SDK_ROOT_DOCKER}'."
 # # run image
-docker run -it --rm \
-    -v ${FRAMSTICKS_SDK_ROOT}:/${FRAMSTICKS_SDK_ROOT} \
+docker run -it --rm --tty \
+    -e DISPLAY=${DISPLAY} \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v ${FRAMSTICKS_SDK_ROOT}:/${FRAMSTICKS_SDK_ROOT_DOCKER} \
     --name ${CONTAINER_NAME} \
     ${IMAGE_NAME}

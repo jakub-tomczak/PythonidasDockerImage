@@ -5,13 +5,16 @@
 This repository helps with setting up development environment for Pythonidas project.
 To launch docker container with the development environment type:
 ```
-./run_pythonidas_env.sh
+./init_framsticks.sh # if framsticks SDK and pythonidas are not initialized yet
+sudo ./run_pythonidas_env.sh # to run container with dev environment
 ```
 
-which will mount `framsticks` directory and add required parameters to `docker run` command.
-It is not required to have FramsticksSDK nor Pythonidas before launching container. The script checks whether FramsticksSDK is located in the `framsticks` directory. If not found then, using subversion, [FramsticksSDK]('https://www.framsticks.com/svn/framsticks/') is being cloned to the `framsticks` directory. Then,  [Pythonias repository]('https://bitbucket.org/mack0/pythonidas/src/master/') is being cloned. If both repositories exist then docker image is being run. If the image has not been built from `Dockerfile` locally then docker tries to pull it from [DockerHub]('https://hub.docker.com/r/jakubtomczak/pythonidas_dev_image').
+which will initialize `framsticksSDK`, `pythonidas` and will mount `framsticks` directory and add required parameters to `docker run` command.
+It is not required to have FramsticksSDK nor Pythonidas before launching container. `init_framsticks.sh` checks whether FramsticksSDK is located in the `framsticks` directory. If not found then, using subversion, [FramsticksSDK]('https://www.framsticks.com/svn/framsticks/') is being cloned to the `framsticks` directory. Then,  [Pythonias repository]('https://bitbucket.org/mack0/pythonidas/src/master/') is being cloned. If both repositories exist then, by using `run_pythonidas_env.sh`, docker image is being run. If the image has not been built from `Dockerfile` locally then docker tries to pull it from [DockerHub]('https://hub.docker.com/r/jakubtomczak/pythonidas_dev_image').
 
 If pythonidas docker image has been already launched and there exists a **running** container with `pythonidas_dev` name then docker runs it and doesn't run another instance of the pythonidas docker image.
+
+### Building Framsticks SDK and pythonidas inside container.
 
 Container should start in `/framsticks` directory. Enter `/framsticks/cpp` directory and build `framsticksSDK` by typing command (may change in the newer versions of `framsticksSDK`):
 ```
